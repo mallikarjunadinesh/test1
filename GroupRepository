@@ -1,0 +1,8 @@
+package com.scb.rwtoolbackend.repository;
+
+import com.scb.rwtoolbackend.model.ReportGroup;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ReportGroupRepository extends JpaRepository<ReportGroup, Long> {
+    ReportGroup findByName(String name);
+}
