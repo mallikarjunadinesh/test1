@@ -1,0 +1,20 @@
+package com.scb.rwtoolbackend.repository;
+
+import com.scb.rwtoolbackend.model.ReportGroup;
+import com.scb.rwtoolbackend.model.Subscriber;
+import com.scb.rwtoolbackend.model.SubscriptionRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.scb.rwtoolbackend.model.SubscriptionRequest.RequestStatus;
+
+import java.util.List;
+
+public interface SubscriptionRequestRepository extends JpaRepository<SubscriptionRequest, Long> {
+    // Check if a request already exists for a user and a group
+    SubscriptionRequest findBySubscriberAndGroup(Subscriber subscriber, ReportGroup group);
+    
+    // Find all pending requests for the Admin page
+    List<SubscriptionRequest> findByStatus(RequestStatus status);
+
+    // Find a specific user's pending requests
+    List<SubscriptionRequest> findBySubscriberAndStatus(Subscriber subscriber, RequestStatus status);
+}
