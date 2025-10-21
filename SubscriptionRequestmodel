@@ -1,0 +1,35 @@
+package com.scb.rwtoolbackend.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "subscription_requests")
+@Data
+@NoArgsConstructor
+public class SubscriptionRequest {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // Foreign Key reference to the user who made the request
+    @ManyToOne 
+    @JoinColumn(name = "subscriber_id", nullable = false)
+    private Subscriber subscriber;
+
+    // Foreign Key reference to the group being requested
+    @ManyToOne 
+    @JoinColumn(name = "group_id", nullable = false)
+    private ReportGroup group;
+
+    @Enumerated(EnumType.STRING)
+    private RequestStatus status = RequestStatus.PENDING;
+
+    private LocalDateTime requestedDate = LocalDateTime.now();
+
+    public enum RequestStatus {
+        PENDING, APPROVED, REJECTED
+    }
+}
