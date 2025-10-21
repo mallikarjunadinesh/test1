@@ -1,0 +1,16 @@
+package com.scb.rwtoolbackend.repository;
+
+import com.scb.rwtoolbackend.model.ReportGroup;
+import com.scb.rwtoolbackend.model.Subscriber;
+import com.scb.rwtoolbackend.model.Subscription;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
+    // Get all approved subscriptions for a specific user
+    List<Subscription> findBySubscriber(Subscriber subscriber);
+
+    // Check if a user is already subscribed to a group
+    Subscription findBySubscriberAndGroup(Subscriber subscriber, ReportGroup group);
+}
