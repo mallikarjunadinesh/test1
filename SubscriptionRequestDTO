@@ -1,0 +1,13 @@
+package com.scb.rwtoolbackend.dto;
+
+import lombok.Data;
+
+// DTO for subscription request/approval from client
+@Data
+public class SubscriptionDTO {
+    private String username;        // The user requesting the subscription
+    private Long groupId;           // The ID of the group being requested
+    private String groupName;       // The name of the group (for request)
+    private Long requestId;         // The ID of the request (for approval)
+    private String action;          // "approve" or "reject" (for admin)
+}
