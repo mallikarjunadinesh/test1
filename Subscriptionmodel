@@ -1,0 +1,31 @@
+package com.scb.rwtoolbackend.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "subscriptions")
+@Data
+@NoArgsConstructor
+// Note: This entity represents an APPROVED subscription (Subscriber - Group link)
+public class Subscription {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // Foreign Key reference to the subscriber
+    @ManyToOne 
+    @JoinColumn(name = "subscriber_id", nullable = false)
+    private Subscriber subscriber;
+
+    // Foreign Key reference to the approved group
+    @ManyToOne 
+    @JoinColumn(name = "group_id", nullable = false)
+    private ReportGroup group;
+
+    private LocalDateTime subscribedOn = LocalDateTime.now();
+    
+    private String status = "Active"; // Hardcoded to 'Active' as per front-end status tag
+}
